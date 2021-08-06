@@ -399,6 +399,12 @@ showStatus () {
 }
 
 syncResults () {
+	#create results folder
+	echo "Create results folder."
+	if [ ! -d ./results/ ]; then
+  		mkdir ./results/;
+	fi
+
 	aws --profile $(jq -r '.awsProfile' settings.json) --region us-east-1 s3 sync \
 		s3://`terraform output results_bucket`/ ./results/
 }
@@ -554,6 +560,13 @@ testFireLocal () {
 	fi
 
 	rm -f results/testResults.json
+	
+	#create results folder
+	echo "Create results folder."
+	if [ ! -d ./results/ ]; then
+  		mkdir ./results/;
+	fi
+	
 	echo "[*] Invoking function locally."
 	cd lambda_functions/warcannon
 	node -e 'require("./main.js").main({}, {}, console.log)'
