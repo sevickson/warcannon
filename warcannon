@@ -557,7 +557,7 @@ testFireLocal () {
 	echo "[*] Invoking function locally."
 	cd lambda_functions/warcannon
 	node -e 'require("./main.js").main({}, {}, console.log)'
-	if [[ $? -eq 0 && -f ../../results/localResults.json ]]; then
+	if [[ $? -eq 0 && -f ./results/localResults.json ]]; then
 		echo
 		echo -e "[+] Local test succeeded. Results were stored to \e[34m./results/localResults.json"
 	else
@@ -565,7 +565,7 @@ testFireLocal () {
 		echo -e "\e[31m[!] Local test failed."
 	fi
 
-	cd ../../
+	cd ./
 }
 
 verifyStatus () {
